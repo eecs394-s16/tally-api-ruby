@@ -1,0 +1,13 @@
+{
+  "name": "tally-api-ruby",
+  "models": [
+    "Collection",
+    "Item"
+  ],
+  "packages": [
+    "login"
+  ],
+  "routes": [
+    "Collection"
+  ]
+}
