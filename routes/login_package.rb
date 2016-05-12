@@ -11,8 +11,9 @@ post '/users' do
 
   # Check if access token is valid
   url = "https://api.pinterest.com/v1/me?access_token=#{payload['access_token']}"
-  res = RestClient.get url
-  if res.code != 200
+  begin
+    res = RestClient.get url
+  rescue
     raise HttpError.new(401), "Access token not valid"
   end
 

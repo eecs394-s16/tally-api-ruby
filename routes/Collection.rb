@@ -77,19 +77,36 @@ post '/pinterest/collections/:id/import' do
   user = session.getField('user')
 
   # Find pinterest board
+  puts 1
   url = "https://api.pinterest.com/v1/boards/" + params[:id] + "/pins/?access_token=#{user.pinterest}"
   res = RestClient.get url
+  puts 2
+  puts res
+  res = JSON.parse(res)
+  puts res
 
   # Create new collection
-  # collection = Collection.new
-  # collection.user_fk = user.id
-  # collection.save
+  collection = Collection.new
+  collection.user_fk = user.id
+  collection.name = payload["name"]
+  collection.save
 
   # Create items from pinterest board and add to collection
-  # TODO
-
+  items = []
+  res["data"].each do |item|
+    new_item = Item.new
+    new_item.collection_fk = collection.id
+    new_item.name  = item["note"]
+    new_item.price = 0
+    new_item.save
+    items.push(new_item.values)
+  end
+  puts 3
   # Response
   content_type :json
   status(200)
-  return res
+  return {
+    collection: collection.values,
+    items: items
+  }.to_json
 end
