@@ -107,6 +107,7 @@ GET /collections
 {
   "collections": [<Collection>]
 }
+```
 
 ### Get Collection by ID
 ```json
