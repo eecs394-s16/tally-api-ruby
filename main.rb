@@ -12,7 +12,7 @@ DB = nil
 if environment == 'DEV'
   DB = Sequel.connect("postgres://postgres:bugzzues@localhost:5432/tally_api_ruby")
 elsif environment == 'PROD'
-  DB = Sequel.connect("postgres://lucidgoose:#{ENV["DB_PASS"]}@#{ENV['DB_PORT_5432_TCP_ADDR']}:#{ENV['DB_PORT_5432_TCP_PORT']}/tally_api_ruby")
+  DB = Sequel.connect("postgres://#{ENV["DB_USER"]}:#{ENV["DB_PASS"]}@localhost:5432/tally_api_ruby")
 end
 
 # Reset DB if env is set
