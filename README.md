@@ -1,10 +1,10 @@
 # Tally API
 ## Table of Contents
 1. Data Structures
-   * User
-   * Session
+   * [User](#User)
+   * [Session](#Session)
 2. User Routes
-   * Create New User
+   * (Create New User)[#create-new-user]
 3. Collection Routes
 
 ## Data Structures
