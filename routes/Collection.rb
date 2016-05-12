@@ -13,16 +13,21 @@ get '/collections' do
 end
 
 get '/collections/:id' do
-  payload = JSON.parse(request.body.read)
+  id = params['id']
   session = Session.fromKey(request.env['HTTP_AUTHORIZATION'])
   user = session.getField('user')
 
-  collection = user.getCollection(params['id'])
+
+  collection = user.getCollection(id)
+
+  items = collection.getItems().map { |e| e.values }
 
   # Response
   content_type :json
   status(200)
-  return {collection: collection}.to_json
+  return {
+    collection: collection.values,
+    items: items}.to_json
 end
 
 post '/collections' do
