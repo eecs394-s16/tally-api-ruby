@@ -18,6 +18,7 @@ To authenticate the request, set the `session_key` as the `Authorization` header
    * [Create New User](#create-new-user)
    * [Login](#login)
 3. Collection Routes
+   * [Get User Collections](#get-user-collections)
    * [Get Collection by ID](#get-collection-by-id)
    * [Import Collection From Pinterest](#import-collection-from-pinterest)
 
@@ -97,15 +98,19 @@ POST /login
 ```
 
 ## Collection Routes
+### Get User Collections
+```json
+GET /collections
+
+// Response
+// =========
+{
+  "collections": [<Collection>]
+}
+
 ### Get Collection by ID
 ```json
 GET /collections/:id
-
-// Request
-// ========
-{
-  "name": <string>
-}
 
 // Response
 // =========

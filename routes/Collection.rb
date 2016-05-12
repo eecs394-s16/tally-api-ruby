@@ -1,10 +1,9 @@
 get '/collections' do
-  payload = JSON.parse(request.body.read)
   session = Session.fromKey(request.env['HTTP_AUTHORIZATION'])
   user = session.getField('user')
 
   # Create new collection
-  collections = Collection.where(:user_fk => user.id)
+  collections = Collection.where(:user_fk => user.id).map { |e| e.values }
 
   # Response
   content_type :json
