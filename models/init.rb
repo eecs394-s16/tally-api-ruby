@@ -9,7 +9,7 @@ module Sequel
     alias_method :orig_validate, :validate
 
     def getField(field)
-      fk = self.call("#{field}_fk")
+      fk = self.send("#{field}_fk")
       instance = Object.const_get(field.capitalize).first(:id => fk)
       raise HttpError.new(404), "#{field.capitalize} with id #{fk} not found" if instance.nil?
       return instance

@@ -3,6 +3,7 @@ require 'sinatra/cross_origin'
 require 'json'
 require 'sequel'
 require 'bcrypt'
+require 'rest-client'
 
 environment = ENV["RAILS_ENV"] || 'DEV'
 

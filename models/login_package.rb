@@ -25,7 +25,7 @@ class User < Sequel::Model(:User)
     collection = Collection.fromID(params['id'])
 
     # Check that collection belongs to user
-    raise HttpError.new(401), "This collection does not belong to you!" if collection.user_fk != this.id
+    raise HttpError.new(403), "This collection does not belong to you!" if collection.user_fk != this.id
 
     return collection
   end

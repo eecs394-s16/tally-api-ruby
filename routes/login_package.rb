@@ -2,10 +2,24 @@
 post '/users' do
   payload = JSON.parse(request.body.read)
 
+  # Get pinterest access token from oauth code
+  # url =  "https://api.pinterest.com/v1/oauth/token?grant_type=authorization_code"
+  # url += "&client_id=4832859821489269966"
+  # url += "&client_secret=8155dc44611a08133cec68f4c36ba76d86548665c496c1d968cf59bf18d6b38b"
+  # url += "&code=#{payload['pinterest']}"
+  # res = JSON.parse(RestClient.post url, :accept => :json)
+
+  # Check if access token is valid
+  url = "https://api.pinterest.com/v1/me?access_token=#{payload['access_token']}"
+  res = RestClient.get url
+  if res.code != 200
+    raise HttpError.new(401), "Access token not valid"
+  end
+
   # Create user
   user = User.new
   user.username  = payload["username"]
-  user.pinterest = payload["pinterest"]
+  user.pinterest = payload["access_token"]
   user.setPassword(payload["password"])
   user.save
 
